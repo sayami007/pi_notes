@@ -7,6 +7,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.planetinnovative.notesapplication.R;
 import com.planetinnovative.notesapplication.model.NoteModel;
@@ -16,10 +17,12 @@ import java.util.ArrayList;
 
 public class NoteCustomAdapter extends RecyclerView.Adapter<NoteViewHolder> {
 
+    private Context ctx;
     private LayoutInflater inflater;
     private ArrayList<NoteModel> data;
 
     public NoteCustomAdapter(Context ctx, ArrayList<NoteModel> data) {
+        this.ctx = ctx;
         this.inflater = LayoutInflater.from(ctx);
         this.data = data;
     }
@@ -33,13 +36,19 @@ public class NoteCustomAdapter extends RecyclerView.Adapter<NoteViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NoteViewHolder holder, final int position) {
         holder.tvNoteTitle.setText(data.get(position).getNoteTitle());
         holder.tvNoteDetail.setText(data.get(position).getNoteDetail());
         if (data.get(position).getNotePriority().equals("High"))
             holder.tvNotePriority.setText("H");
         else
             holder.tvNotePriority.setText("L");
+        holder.tvNoteTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ctx, data.get(position).getNoteTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

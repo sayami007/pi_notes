@@ -43,33 +43,11 @@ public class MainActivity extends AppCompatActivity {
             data.add(realmData.get(i));
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new NoteCustomAdapter(getApplicationContext(), data));
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        System.out.println("START");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        System.out.println("Resume");
-    }
-
-
-    @Override
-    protected void onPause() {
-        System.out.println("PAuse");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        System.out.println("STOP");
-        super.onStop();
     }
 
     @Override
@@ -87,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
             data.add(realmData.get(i));
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(new NoteCustomAdapter(getApplicationContext(), data));
     }
 
